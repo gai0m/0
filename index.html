@@ -1,0 +1,587 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 Kitty World 💖 - Welcome Purrfect Friends!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Pacifico&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Color Palette & Variables --- */
+        :root {
+            --bg-light: #fff7fb;      /* Very light pink */
+            --primary-pink: #ffcce7;   /* Soft pink */
+            --secondary-lavender: #e1d5ff; /* Soft lavender */
+            --accent-mint: #cfffe5;    /* Soft mint accent (optional) */
+            --text-dark: #6b4f71;      /* Dark purplish grey for text */
+            --text-light: #ffffff;     /* White text */
+            --heart-color: #ff7aa8;   /* Brighter pink for hearts/buttons */
+            --font-body: 'Quicksand', sans-serif;
+            --font-heading: 'Pacifico', cursive;
+            --header-height: 70px;
+        }
+
+        /* --- Base Styles & Reset --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--header-height);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--bg-light), var(--secondary-lavender));
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 16px;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* --- Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--heart-color);
+            margin-bottom: 0.7em;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        h1 { font-size: 3.5rem; text-align: center; }
+        h2 { font-size: 2.8rem; text-align: center; }
+        h3 { font-size: 1.8rem; color: var(--primary-pink); text-align: left;}
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        a {
+            color: var(--heart-color);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        a:hover {
+            opacity: 0.8;
+        }
+
+        /* --- Header & Navigation --- */
+        .site-header {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            backdrop-filter: blur(5px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            box-shadow: 0 2px 10px rgba(255, 204, 231, 0.5); /* Pinkish shadow */
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--heart-color);
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .main-nav li {
+            margin-left: 25px;
+        }
+
+        .main-nav a {
+            font-weight: 600;
+            color: var(--text-dark);
+            padding: 5px 8px;
+            border-radius: 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .main-nav a:hover, .main-nav a.active {
+            background-color: var(--primary-pink);
+            color: var(--text-light);
+        }
+
+        /* --- Sections --- */
+        section {
+            padding: 80px 0;
+            position: relative; /* For potential absolute elements */
+        }
+         section:nth-of-type(even) {
+            background-color: rgba(255, 255, 255, 0.4); /* Slight background variation */
+            border-radius: 30px;
+            margin: 20px 0; /* Add some space around sections */
+         }
+
+        /* --- Welcome Section --- */
+        #welcome {
+            text-align: center;
+            padding-top: calc(var(--header-height) + 100px);
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+         #welcome h1 {
+             margin-bottom: 0.3em;
+         }
+         #welcome .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+         }
+         #welcome img.hero-cat {
+            max-width: 250px;
+            height: auto;
+            margin-top: 30px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.15));
+         }
+
+        /* Bouncing Paws Animation */
+        .bouncing-paws {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+        .paw {
+            width: 40px;
+            height: 35px;
+            background-color: var(--primary-pink);
+            border-radius: 50% 50% 30% 30%; /* Paw shape */
+            position: relative;
+            opacity: 0.8;
+            animation: bounce 1s infinite ease-in-out;
+        }
+        .paw::before { /* Paw pads */
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--heart-color);
+            border-radius: 50%;
+            top: 8px;
+            left: 5px;
+            box-shadow: 15px 0 0 var(--heart-color), 7.5px -5px 0 var(--heart-color);
+        }
+        /* Stagger animation */
+        .paw:nth-child(2) { animation-delay: 0.2s; }
+        .paw:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* --- Gallery Section --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 4px solid var(--primary-pink);
+            box-shadow: 0 4px 10px rgba(255, 204, 231, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 8px 20px rgba(255, 204, 231, 0.8);
+        }
+
+        /* --- Cat Facts Section --- */
+        #facts .container {
+            text-align: center;
+        }
+        #cat-fact-display {
+            background-color: var(--text-light);
+            border: 3px dashed var(--secondary-lavender);
+            padding: 25px 30px;
+            border-radius: 20px;
+            min-height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 30px auto;
+            max-width: 700px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        #new-fact-btn {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 12px 25px;
+            background-color: var(--heart-color);
+            color: var(--text-light);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        #new-fact-btn:hover {
+            background-color: #ff5f90; /* Darker pink */
+            transform: translateY(-2px);
+        }
+        #new-fact-btn::before {
+            content: '🐾 '; /* Paw emoji */
+        }
+
+        /* --- Japanese Quotes Section --- */
+        #quotes .container {
+            max-width: 700px;
+            text-align: center;
+        }
+        
+        .quote-display {
+            background-color: var(--text-light);
+            border: 3px solid var(--primary-pink);
+            padding: 30px;
+            border-radius: 20px;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .quote-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .quote-japanese {
+            font-size: 1.5rem;
+            color: var(--heart-color);
+            margin-bottom: 10px;
+        }
+        
+        .quote-english {
+            font-style: italic;
+            color: var(--text-dark);
+        }
+        
+        .quote-author {
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+        
+        #new-quote-btn {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 12px 25px;
+            background-color: var(--heart-color);
+            color: var(--text-light);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            margin-top: 10px;
+        }
+        
+        #new-quote-btn:hover {
+            background-color: #ff5f90; /* Darker pink */
+            transform: translateY(-2px);
+        }
+        
+        #new-quote-btn::before {
+            content: '🌸 '; /* Cherry blossom emoji */
+        }
+
+        /* --- Footer --- */
+        .site-footer {
+            background-color: var(--primary-pink);
+            color: var(--text-light);
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+        .footer-timestamp {
+            opacity: 0.8;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        
+        /* Telegram link styling */
+        .telegram-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 15px;
+            background-color: var(--heart-color);
+            color: var(--text-light);
+            border-radius: 20px;
+            font-weight: 600;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+        
+        .telegram-link:hover {
+            background-color: #ff5f90;
+            transform: translateY(-2px);
+            opacity: 1;
+        }
+
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+
+            .main-nav { /* Basic: hide nav on small screens - needs JS for toggle */
+               /* display: none; */
+               /* A real site would use JS for a burger menu */
+            }
+             .logo { font-size: 1.5rem; }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+             .gallery-item img { height: 150px; }
+             .bouncing-paws { display: none; } /* Hide complex animation on small screens maybe */
+             .quote-japanese { font-size: 1.3rem; }
+             .quote-text { font-size: 1.1rem; }
+        }
+        @media (max-width: 480px) {
+             h1 { font-size: 2.2rem; }
+             h2 { font-size: 1.8rem; }
+             #cat-fact-display { font-size: 1rem; padding: 20px;}
+             .quote-display { padding: 20px; }
+             .quote-japanese { font-size: 1.2rem; }
+             .quote-text { font-size: 1rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">💖 Kitty World</div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#welcome">Welcome</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#facts">Facts</a></li>
+                    <li><a href="#quotes">Quotes</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="welcome">
+            <div class="container">
+                <h1>Welcome, Purrfect Friends!</h1>
+                <p class="subtitle">Step into a world of fluff, whiskers, and endless cuteness!</p>
+                <img src="cat7.jpg" alt="Adorable fluffy kitten" class="hero-cat">
+                </div>
+             <div class="bouncing-paws">
+                <div class="paw"></div>
+                <div class="paw"></div>
+                <div class="paw"></div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="container">
+                <h2>Cutie Patootie Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item"><img src="cat1.jpg" alt="Cute kitten 1"></div>
+                    <div class="gallery-item"><img src="cat2.jpg" alt="Cute kitten 2"></div>
+                    <div class="gallery-item"><img src="cat3.jpg" alt="Cute kitten 3"></div>
+                    <div class="gallery-item"><img src="cat4.jpg" alt="Cute kitten 4"></div>
+                    <div class="gallery-item"><img src="cat5.jpg" alt="Cute kitten 5"></div>
+                    <div class="gallery-item"><img src="cat6.jpg" alt="Cute kitten 6"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="facts">
+            <div class="container">
+                <h2>Did You Know?</h2>
+                <div id="cat-fact-display">
+                    Loading a fun cat fact... 🐾
+                </div>
+                <button id="new-fact-btn">Get Another Fact!</button>
+            </div>
+        </section>
+
+        <section id="quotes">
+            <div class="container">
+                <h2>Japanese Wisdom</h2>
+                <div class="quote-display">
+                    <p class="quote-japanese" id="quote-japanese">猫の恩返し</p>
+                    <div class="quote-text">
+                        <p class="quote-english" id="quote-english">A cat never forgets a kindness.</p>
+                    </div>
+                    <p class="quote-author" id="quote-author">- Japanese Proverb</p>
+                </div>
+                <button id="new-quote-btn">New Quote</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; Kitty World | Spreading Joy One Paw at a Time 🐾💖</p>
+            <p>Made with love by <a href="https://t.me/N77_1" class="telegram-link" target="_blank">N77_1</a></p>
+            <p class="footer-timestamp">Generated: Wednesday, April 2, 2025 at 5:29 AM +03 @ Baghdad, Iraq.</p>
+        </div>
+    </footer>
+
+    <script>
+        const catFacts = [
+            "Cats sleep for 70% of their lives.",
+            "A group of cats is called a clowder.",
+            "The oldest known pet cat existed 9,500 years ago.",
+            "Cats can make over 100 different vocalizations; dogs make about 10.",
+            "A cat's nose print is unique, much like a human's fingerprint.",
+            "Cats can jump up to six times their length.",
+            "Isaac Newton is credited with inventing the cat door.",
+            "In ancient Egypt, killing a cat could result in the death penalty.",
+            "The world's richest cat inherited $13 million from its owner.",
+            "Cats can't taste sweetness.",
+            "A female cat is called a queen or a molly.",
+            "Most cats are lactose intolerant, so don't give them milk!",
+            "Purring doesn't always mean a cat is happy; they also purr when stressed or hurt."
+        ];
+
+        const factDisplay = document.getElementById('cat-fact-display');
+        const newFactBtn = document.getElementById('new-fact-btn');
+
+        function displayRandomFact() {
+            const randomIndex = Math.floor(Math.random() * catFacts.length);
+            factDisplay.innerHTML = `🐾 ${catFacts[randomIndex]} 🐾`; // Add paws around fact
+        }
+
+        // Display initial fact on load
+        document.addEventListener('DOMContentLoaded', displayRandomFact);
+
+        // Add event listener to button
+        newFactBtn.addEventListener('click', displayRandomFact);
+        
+        // Japanese quotes
+        const japaneseQuotes = [
+            {
+                japanese: "猫の恩返し",
+                english: "A cat never forgets a kindness.",
+                author: "Japanese Proverb"
+            },
+            {
+                japanese: "猫に小判",
+                english: "Gold coins to a cat (giving something valuable to someone who doesn't appreciate it).",
+                author: "Japanese Proverb"
+            },
+            {
+                japanese: "猫の手も借りたい",
+                english: "I would even borrow a cat's paws (being so busy that any help is welcome).",
+                author: "Japanese Proverb"
+            },
+            {
+                japanese: "猫は七度生きる",
+                english: "A cat has seven lives.",
+                author: "Japanese Saying"
+            },
+            {
+                japanese: "千里の道も一歩から",
+                english: "A journey of a thousand miles begins with a single step.",
+                author: "Japanese Version of Chinese Proverb"
+            },
+            {
+                japanese: "花は桜木、人は武士",
+                english: "Among flowers, the cherry blossom; among men, the warrior.",
+                author: "Japanese Proverb"
+            },
+            {
+                japanese: "七転び八起き",
+                english: "Fall seven times, stand up eight.",
+                author: "Japanese Proverb"
+            },
+            {
+                japanese: "猿も木から落ちる",
+                english: "Even monkeys fall from trees (even experts make mistakes).",
+                author: "Japanese Proverb"
+            },
+            {
+                japanese: "縁の下の力持ち",
+                english: "A person who supports others from the shadows.",
+                author: "Japanese Expression"
+            },
+            {
+                japanese: "一期一会",
+                english: "One lifetime, one encounter (treasure every meeting, for it will never recur).",
+                author: "Japanese Tea Ceremony Concept"
+            }
+        ];
+        
+        const quoteJapanese = document.getElementById('quote-japanese');
+        const quoteEnglish = document.getElementById('quote-english');
+        const quoteAuthor = document.getElementById('quote-author');
+        const newQuoteBtn = document.getElementById('new-quote-btn');
+        
+        function displayRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * japaneseQuotes.length);
+            const quote = japaneseQuotes[randomIndex];
+            
+            quoteJapanese.textContent = quote.japanese;
+            quoteEnglish.textContent = quote.english;
+            quoteAuthor.textContent = `- ${quote.author}`;
+        }
+        
+        // Display initial quote on load
+        document.addEventListener('DOMContentLoaded', displayRandomQuote);
+        
+        // Add event listener to button
+        newQuoteBtn.addEventListener('click', displayRandomQuote);
+    </script>
+
+</body>
+</html>
+</qodoArtifact>
+
+لأختي كامل الحب من مصطفى
